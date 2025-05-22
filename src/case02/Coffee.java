@@ -46,7 +46,6 @@ public class Coffee {
 	// 類別資料初始化區段
 	static {
 		// 初始化規則
-		//rules.add(new CoffeeRule("濃郁的拿鐵", "牛奶的比例遠高於咖啡，味道偏向牛奶。",(牛奶, 咖啡) -> 牛奶 >= 3 * 咖啡))，可直接複製老師的文字再進行修改。
 		rules.add(new CoffeeRule("濃郁的拿鐵", "牛奶的比例遠高於咖啡，味道偏向牛奶。", 
 				(milk, coffee) -> milk >= 3 * coffee));
 		rules.add(new CoffeeRule("平衡的拿鐵咖啡", "牛奶與咖啡的比例較為平衡，風味溫和。", 
@@ -60,28 +59,27 @@ public class Coffee {
 		
 	}
 	
-	//coffee建構子
+	// Coffee 建構子
 	public Coffee(Double milk, Double coffee) {
 		this.milk = milk;
 		this.coffee = coffee;
 	}
 	
-	//*新增，如果Coffee、milk是字串的話。
 	public Coffee(String milk, String coffee) {
 		this(Double.parseDouble(milk), Double.parseDouble(coffee));
 	}
 	
-	//判斷咖啡類型
+	// 判斷咖啡類型
 	public String getCoffeeType() {
 		return rules.stream()
-					.filter(rule -> rule.matches(milk, coffee)) // 找出符合條件的規格
-					.findFirst()								//取得第一筆匹配的
-					//.map(CoffeeRule::getResult)					//傳換成字串
-					.map(rule -> rule.getResult())					//傳換成字串
+					.filter(rule -> rule.matches(milk, coffee)) // 找出符合條件的規則
+					.findFirst()                                // 取得第一筆匹配的
+					//.map(CoffeeRule::getResult)                 // 傳換成字串
+					.map(rule -> rule.getResult())                 // 傳換成字串
 					.orElse("無法辨識的咖啡類型");
 	}
 	
-	//Getter
+	// Getter
 	public Double getMilk() {
 		return milk;
 	}
@@ -89,4 +87,5 @@ public class Coffee {
 	public Double getCoffee() {
 		return coffee;
 	}
+	
 }
